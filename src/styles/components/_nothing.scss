@@ -1,0 +1,21 @@
+.nothing__main-content {
+  align-items: center;
+
+  background-color: #7f53ac;
+  background-image: linear-gradient(
+    315deg,
+    #7f53ac 0%,
+    #647dee 74%
+  );
+
+  color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+
+  p {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+}
