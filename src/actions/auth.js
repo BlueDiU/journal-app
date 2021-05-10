@@ -1,4 +1,5 @@
 import { types } from '../components/types/types';
+import Swal from 'sweetalert2';
 
 import {
   firebase,
@@ -18,7 +19,11 @@ export const startLoginEmailPass = (email, password) => {
 
         dispatch(finishLoading());
       })
-      .catch(() => dispatch(finishLoading()));
+      .catch((err) => {
+        dispatch(finishLoading());
+        console.error(err);
+        Swal.fire('Error', err.message, 'error');
+      });
   };
 };
 
@@ -48,7 +53,10 @@ export const startRegisterWithEmailPasswordName = (
 
         dispatch(login(user.uid, user.displayName));
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        Swal.fire('Error', err.message, 'error');
+      });
   };
 };
 
