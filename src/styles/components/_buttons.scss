@@ -35,6 +35,17 @@
   width: 100%;
 }
 
+.btn-danger {
+  background-color: #ec7063;
+  font-size: 0.9rem;
+
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken($color: #ec7063, $amount: 10);
+  }
+}
+
 .center {
   text-align: center;
 }
