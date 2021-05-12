@@ -1,4 +1,4 @@
-import { types } from '../components/types/types';
+import { types } from '../types/types';
 import Swal from 'sweetalert2';
 
 import {
@@ -60,14 +60,6 @@ export const startRegisterWithEmailPasswordName = (
   };
 };
 
-export const login = (uid, displayName) => ({
-  type: types.login,
-  payload: {
-    uid,
-    displayName,
-  },
-});
-
 export const startLogout = () => {
   return async (dispatch) => {
     await firebase.auth().signOut();
@@ -75,6 +67,15 @@ export const startLogout = () => {
     dispatch(logout());
   };
 };
+
+// auth actions
+export const login = (uid, displayName) => ({
+  type: types.login,
+  payload: {
+    uid,
+    displayName,
+  },
+});
 
 export const logout = () => ({
   type: types.logout,

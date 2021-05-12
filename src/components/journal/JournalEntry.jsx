@@ -1,29 +1,43 @@
 import React from 'react';
+import dayjs from 'dayjs';
 
-function JournalEntry() {
+import advancedFormat from 'dayjs/plugin/advancedFormat';
+import { useDispatch } from 'react-redux';
+import { activeNote } from '../../actions/notes';
+
+function JournalEntry({ id, date, title, body, url }) {
+  const dispatch = useDispatch();
+
+  dayjs.extend(advancedFormat);
+  const noteDate = dayjs(date);
+
+  const handleEntryClick = () => {
+    dispatch(activeNote(id, { title, body, date, url }));
+  };
+
   return (
-    <div className="journal__entry">
-      <div
-        className="journal__entry-picture"
-        style={{
-          backgroundSize: 'cover',
-          backgroundImage:
-            'url(https://miro.medium.com/max/2560/1*wFL3csJ96lQpY0IVT9SE3w.jpeg)',
-          verticalAlign: 'middle',
-        }}
-      ></div>
+    <div className="journal__entry" onClick={handleEntryClick}>
+      {url && (
+        <div
+          className="journal__entry-picture"
+          style={{
+            backgroundSize: 'cover',
+            backgroundImage: `url(${url})`,
+            verticalAlign: 'middle',
+          }}
+        ></div>
+      )}
 
       <div className="journal__entry-body">
-        <p className="journal__entry-title">Test</p>
-        <p className="journal__entry-content">
-          Lorem ipsum dolor sit amet consectetur, adipisicing
-          elit. Soluta, sequi.
-        </p>
+        <p className="journal__entry-title">{title}</p>
+
+        <p className="journal__entry-content">{body}</p>
       </div>
 
       <div className="journal__entry-date-box">
-        <span>Monday</span>
-        <h4>28</h4>
+        <span>{noteDate.format('dddd')}</span>
+
+        <h4>{noteDate.format('Do')}</h4>
       </div>
     </div>
   );
